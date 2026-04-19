@@ -17,4 +17,8 @@ runs:
   using: composite
   steps:
     - shell: bash
-      run: npx --yes agent-secret-guard scan "${{ inputs.path }}" --fail-on "${{ inputs.fail-on }}" --format "${{ inputs.format }}"
+      run: npm ci --prefix "$GITHUB_ACTION_PATH"
+    - shell: bash
+      run: npm run build --prefix "$GITHUB_ACTION_PATH"
+    - shell: bash
+      run: node "$GITHUB_ACTION_PATH/dist/cli.js" scan "${{ inputs.path }}" --fail-on "${{ inputs.fail-on }}" --format "${{ inputs.format }}"

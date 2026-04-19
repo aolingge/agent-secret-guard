@@ -18,6 +18,7 @@
     "test": "vitest run",
     "lint": "tsc -p tsconfig.json --noEmit",
     "scan": "node dist/cli.js scan",
+    "prepare": "npm run build",
     "prepack": "npm run build"
   },
   "keywords": [
