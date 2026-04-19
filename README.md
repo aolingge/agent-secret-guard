@@ -1,5 +1,7 @@
 # agent-secret-guard
 
+Read this in your language: English | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Español](README.es.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Português](README.pt.md) | [Русский](README.ru.md) | [العربية](README.ar.md) | [हिन्दी](README.hi.md) | [Bahasa Indonesia](README.id.md)
+
 Dangerous config and secret scanner for AI coding agents, MCP, and local automation projects.
 
 [![npm version](https://img.shields.io/npm/v/agent-secret-guard.svg)](https://www.npmjs.com/package/agent-secret-guard)
@@ -115,7 +117,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: aolingge/agent-secret-guard@v0.2.2
+      - uses: aolingge/agent-secret-guard@v0.2.3
         with:
           fail-on: high
 ```
@@ -139,7 +141,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: aolingge/agent-secret-guard@v0.2.2
+      - uses: aolingge/agent-secret-guard@v0.2.3
         with:
           fail-on: high
           format: sarif
@@ -157,7 +159,7 @@ Install [pre-commit](https://pre-commit.com/) and add this to `.pre-commit-confi
 ```yaml
 repos:
   - repo: https://github.com/aolingge/agent-secret-guard
-    rev: v0.2.2
+    rev: v0.2.3
     hooks:
       - id: agent-secret-guard
 ```

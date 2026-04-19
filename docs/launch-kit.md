@@ -11,7 +11,7 @@ This file gives maintainers copy-paste launch material for a new release. Keep t
 Title:
 
 ```text
-agent-secret-guard v0.2.2: clearer launch docs, privacy notes, and remediation guides
+agent-secret-guard vNEXT: clearer launch docs, privacy notes, and remediation guides
 ```
 
 Body:

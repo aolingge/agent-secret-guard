@@ -1,6 +1,6 @@
 {
   "name": "agent-secret-guard",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Dangerous config and secret scanner for AI coding agents, MCP, and local automation projects.",
   "type": "module",
   "packageManager": "npm@10.9.7",
@@ -11,6 +11,7 @@
     "dist",
     "docs",
     "README.md",
+    "README.*.md",
     "CHANGELOG.md",
     "LICENSE",
     "SECURITY.md",
@@ -40,6 +41,7 @@
     "github-actions",
     "sarif",
     "mcp-server",
+    "i18n",
     "codex",
     "claude-code"
   ],

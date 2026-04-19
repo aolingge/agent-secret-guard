@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.3 - 2026-04-20
+
+- Add multilingual README switcher and localized README landing pages for Simplified Chinese, Traditional Chinese, Japanese, Korean, Spanish, French, German, Portuguese, Russian, Arabic, Hindi, and Indonesian.
+- Include localized README files in the npm package so package readers can follow language links.
+- Add `i18n` as a package keyword for discoverability.
+
 ## 0.2.2 - 2026-04-20
 
 - Improve README positioning, quick-start output, privacy notes, comparison guidance, and remediation links.
