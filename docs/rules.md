@@ -22,4 +22,16 @@ Looks for personal browser profile paths and cookie store references.
 
 ## `credential-store-exposure`
 
-Looks for OS credential stores and common token files such as `.git-credentials`, `.aws/credentials`, and `.npmrc`.
+Looks for OS credential stores and sensitive token files such as `.git-credentials` and `.aws/credentials`.
+
+## `github-actions-write-all`
+
+Looks for GitHub Actions workflows that grant `permissions: write-all`. This is especially risky in release and package-publishing workflows.
+
+## `github-actions-mutable-ref`
+
+Looks for GitHub Actions that use mutable refs such as `@main`, `@master`, or `@latest`.
+
+## Package Registry Tokens
+
+The `hardcoded-secret` rule also looks for npm, PyPI, GitHub, GitLab, Hugging Face, Slack, AWS, Google API, Stripe, OpenAI, and Anthropic-style token shapes. Fake fixtures should use obviously fake values and never real credentials.

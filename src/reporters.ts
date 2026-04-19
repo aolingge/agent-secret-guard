@@ -1,4 +1,5 @@
-import type { ScanResult, Severity } from "./types.js";
+import { createHash } from "node:crypto";
+import type { Finding, ScanResult, Severity } from "./types.js";
 
 const SEVERITY_ORDER: Record<Severity, number> = {
   critical: 0,
@@ -43,6 +44,31 @@ export function formatJsonReport(result: ScanResult): string {
   return `${JSON.stringify(result, null, 2)}\n`;
 }
 
+export function formatSarifReport(result: ScanResult): string {
+  const rules = [...new Map(result.findings.map((finding) => [finding.ruleId, sarifRuleForFinding(finding)])).values()];
+
+  return `${JSON.stringify(
+    {
+      version: "2.1.0",
+      $schema: "https://json.schemastore.org/sarif-2.1.0.json",
+      runs: [
+        {
+          tool: {
+            driver: {
+              name: "agent-secret-guard",
+              informationUri: "https://github.com/aolingge/agent-secret-guard",
+              rules
+            }
+          },
+          results: result.findings.map(toSarifResult)
+        }
+      ]
+    },
+    null,
+    2
+  )}\n`;
+}
+
 export function shouldFailForSeverity(result: ScanResult, threshold: Severity): boolean {
   return result.findings.some((finding) => SEVERITY_ORDER[finding.severity] <= SEVERITY_ORDER[threshold]);
 }
@@ -59,4 +85,82 @@ function countBySeverity(result: ScanResult): Record<Severity, number> {
     },
     { critical: 0, high: 0, medium: 0, low: 0 }
   );
+}
+
+function sarifRuleForFinding(finding: Finding) {
+  return {
+    id: finding.ruleId,
+    name: finding.ruleId,
+    shortDescription: {
+      text: finding.title
+    },
+    fullDescription: {
+      text: finding.why
+    },
+    help: {
+      text: [finding.why, finding.recommendation, finding.safeExample ? `Safe example: ${finding.safeExample}` : ""]
+        .filter(Boolean)
+        .join("\n\n")
+    },
+    properties: {
+      tags: ["security", "ai-agent", "mcp"],
+      precision: "medium",
+      "security-severity": securitySeverity(finding.severity)
+    }
+  };
+}
+
+function toSarifResult(finding: Finding) {
+  return {
+    ruleId: finding.ruleId,
+    level: sarifLevel(finding.severity),
+    message: {
+      text: `${finding.title}: ${finding.recommendation}`
+    },
+    locations: [
+      {
+        physicalLocation: {
+          artifactLocation: {
+            uri: finding.filePath
+          },
+          region: {
+            startLine: Math.max(finding.line, 1)
+          }
+        }
+      }
+    ],
+    partialFingerprints: {
+      primaryLocationLineHash: stableFingerprint(finding)
+    },
+    properties: {
+      severity: finding.severity,
+      evidence: finding.evidence
+    }
+  };
+}
+
+function sarifLevel(severity: Severity): "error" | "warning" | "note" {
+  if (severity === "critical" || severity === "high") {
+    return "error";
+  }
+  if (severity === "medium") {
+    return "warning";
+  }
+  return "note";
+}
+
+function securitySeverity(severity: Severity): string {
+  const values: Record<Severity, string> = {
+    critical: "9.0",
+    high: "7.0",
+    medium: "5.0",
+    low: "3.0"
+  };
+  return values[severity];
+}
+
+function stableFingerprint(finding: Finding): string {
+  return createHash("sha256")
+    .update([finding.ruleId, finding.filePath, String(finding.line), finding.evidence].join("\0"))
+    .digest("hex");
 }

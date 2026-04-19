@@ -88,4 +88,44 @@ describe("scanTarget", () => {
 
     expect(result.findings).toHaveLength(0);
   });
+
+  test("flags package registry tokens in config files", async () => {
+    const result = await scanTarget({
+      files: [
+        {
+          path: ".npmrc",
+          content: "//registry.npmjs.org/:_authToken=npm_123456789012345678901234567890"
+        },
+        {
+          path: ".pypirc",
+          content:
+            "password = pypi-AgEIcHlwaS5vcmcCJDJlMGNhMTJhLTc5YjMtNGE5OC1hYjk3LTkyZTFiMGZkYjViNgA"
+        }
+      ]
+    });
+
+    expect(result.findings.filter((finding) => finding.ruleId === "hardcoded-secret")).toHaveLength(2);
+  });
+
+  test("flags broad GitHub Actions permissions and mutable action refs", async () => {
+    const result = await scanTarget({
+      files: [
+        {
+          path: ".github/workflows/release.yml",
+          content: [
+            "name: Release",
+            "permissions: write-all",
+            "jobs:",
+            "  release:",
+            "    steps:",
+            "      - uses: example/action@main"
+          ].join("\n")
+        }
+      ]
+    });
+
+    expect(result.findings.map((finding) => finding.ruleId)).toEqual(
+      expect.arrayContaining(["github-actions-write-all", "github-actions-mutable-ref"])
+    );
+  });
 });

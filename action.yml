@@ -10,9 +10,13 @@ inputs:
     required: false
     default: high
   format:
-    description: "Output format: text or json."
+    description: "Output format: text, json, or sarif."
     required: false
     default: text
+  output:
+    description: Optional file path to write the report to.
+    required: false
+    default: ""
 runs:
   using: composite
   steps:
@@ -21,4 +25,9 @@ runs:
     - shell: bash
       run: npm run build --prefix "$GITHUB_ACTION_PATH"
     - shell: bash
-      run: node "$GITHUB_ACTION_PATH/dist/cli.js" scan "${{ inputs.path }}" --fail-on "${{ inputs.fail-on }}" --format "${{ inputs.format }}"
+      run: |
+        args=(scan "${{ inputs.path }}" --fail-on "${{ inputs.fail-on }}" --format "${{ inputs.format }}")
+        if [ -n "${{ inputs.output }}" ]; then
+          args+=(--output "${{ inputs.output }}")
+        fi
+        node "$GITHUB_ACTION_PATH/dist/cli.js" "${args[@]}"

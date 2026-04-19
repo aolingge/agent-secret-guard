@@ -1,7 +1,7 @@
 import type { RuleMatch, ScanFile } from "./types.js";
 
 const SECRET_VALUE_PATTERN =
-  /(?:sk-[A-Za-z0-9_-]{20,}|sk-ant-[A-Za-z0-9_-]{20,}|gh[pousr]_[A-Za-z0-9_]{20,}|xox[baprs]-[A-Za-z0-9-]{20,}|AKIA[0-9A-Z]{16})/g;
+  /(?:sk-ant-[A-Za-z0-9_-]{20,}|sk-[A-Za-z0-9_-]{20,}|npm_[A-Za-z0-9]{24,}|pypi-[A-Za-z0-9_-]{50,}|github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9_]{20,}|glpat-[A-Za-z0-9_-]{20,}|hf_[A-Za-z0-9]{20,}|xox[baprs]-[A-Za-z0-9-]{20,}|AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{35}|sk_(?:live|test)_[A-Za-z0-9]{16,})/g;
 
 const NAMED_SECRET_PATTERN =
   /\b(?:api[_-]?key|access[_-]?token|auth[_-]?token|secret|password)\b\s*[:=]\s*["']?([^"'\s,#}]{12,})/gi;
@@ -21,12 +21,13 @@ const BROWSER_PROFILE_PATTERN =
   /(?:Chrome\\User Data|Google[\\/]+Chrome[\\/]+User Data|Microsoft[\\/]+Edge[\\/]+User Data|Firefox[\\/]+Profiles|Cookies(?:\s|$)|Network[\\/]+Cookies)/i;
 
 const CREDENTIAL_STORE_PATTERN =
-  /(?:Windows Credential Manager|Credential Manager|Keychain|\.git-credentials|\.aws[\\/]+credentials|\.npmrc|_authToken)/i;
+  /(?:Windows Credential Manager|Credential Manager|Keychain|\.git-credentials|\.aws[\\/]+credentials)/i;
 
 const BROAD_FS_PATTERN =
   /(?:["'\s](?:\/|C:\\|C:\/|\/Users|\/home|C:\\Users|C:\/Users)["'\s,]|--root\s+(?:\/|C:\\|C:\/)|--allow\s+(?:\/|C:\\|C:\/))/gi;
 
 const MCP_FILE_PATTERN = /(?:^|[\\/])(?:\.mcp\.json|mcp\.json|settings\.json)$/i;
+const GITHUB_ACTIONS_WORKFLOW_PATTERN = /(?:^|[\\/])\.github[\\/]workflows[\\/][^\\/]+\.ya?ml$/i;
 
 export function scanFileWithRules(file: ScanFile): RuleMatch[] {
   const matches: RuleMatch[] = [];
@@ -42,6 +43,10 @@ export function scanFileWithRules(file: ScanFile): RuleMatch[] {
   matches.push(...findDangerousShellCommands(content));
   matches.push(...findBrowserProfileExposure(content));
   matches.push(...findCredentialStoreExposure(content));
+
+  if (GITHUB_ACTIONS_WORKFLOW_PATTERN.test(file.path)) {
+    matches.push(...findGitHubActionsRisks(content));
+  }
 
   return dedupeMatches(matches);
 }
@@ -210,6 +215,38 @@ function findCredentialStoreExposure(content: string): RuleMatch[] {
       line: lineForIndex(content, match.index ?? 0)
     }
   ];
+}
+
+function findGitHubActionsRisks(content: string): RuleMatch[] {
+  const matches: RuleMatch[] = [];
+
+  for (const match of content.matchAll(/^\s*permissions:\s*write-all\s*$/gim)) {
+    matches.push({
+      ruleId: "github-actions-write-all",
+      severity: "high",
+      title: "GitHub Actions grants write-all permissions",
+      evidence: match[0].trim(),
+      why: "A broad workflow token can turn a compromised build step into repository, release, or package write access.",
+      recommendation: "Grant only the permissions each job needs, such as contents: read or id-token: write for trusted publishing.",
+      safeExample: "permissions:\n  contents: read\n  id-token: write",
+      line: lineForIndex(content, match.index ?? 0)
+    });
+  }
+
+  for (const match of content.matchAll(/uses:\s*[^@\s]+\/[^@\s]+@(?:main|master|latest)\b/gim)) {
+    matches.push({
+      ruleId: "github-actions-mutable-ref",
+      severity: "medium",
+      title: "GitHub Action uses a mutable ref",
+      evidence: match[0].trim(),
+      why: "Mutable action refs can change without a repository diff, which weakens release reproducibility.",
+      recommendation: "Pin third-party actions to a version tag you intentionally review, or to a full commit SHA for highest assurance.",
+      safeExample: "uses: actions/checkout@v4",
+      line: lineForIndex(content, match.index ?? 0)
+    });
+  }
+
+  return matches;
 }
 
 function visitJson(value: unknown, visitor: (value: unknown, keyPath: string[]) => void, keyPath: string[] = []): void {

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { formatJsonReport, formatTextReport, shouldFailForSeverity } from "../src/reporters.js";
+import { formatJsonReport, formatSarifReport, formatTextReport, shouldFailForSeverity } from "../src/reporters.js";
 import type { ScanResult } from "../src/types.js";
 
 const result: ScanResult = {
@@ -38,6 +38,17 @@ describe("reporters", () => {
       severity: "critical",
       filePath: ".mcp.json"
     });
+  });
+
+  test("formats sarif report for GitHub code scanning", () => {
+    const report = JSON.parse(formatSarifReport(result)) as {
+      version: string;
+      runs: Array<{ tool: { driver: { rules: Array<{ id: string }> } }; results: Array<{ ruleId: string }> }>;
+    };
+
+    expect(report.version).toBe("2.1.0");
+    expect(report.runs[0].tool.driver.rules[0].id).toBe("mcp-token-in-args");
+    expect(report.runs[0].results[0].ruleId).toBe("mcp-token-in-args");
   });
 
   test("compares fail-on severity thresholds", () => {

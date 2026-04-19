@@ -1,4 +1,5 @@
 export type Severity = "low" | "medium" | "high" | "critical";
+export type OutputFormat = "text" | "json" | "sarif";
 
 export interface ScanFile {
   path: string;
@@ -20,6 +21,7 @@ export interface Finding {
 export interface ScanTargetInput {
   root?: string;
   files?: ScanFile[];
+  excludePatterns?: string[];
 }
 
 export interface ScanResult {

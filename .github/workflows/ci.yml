@@ -5,18 +5,40 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [20, 22, 24]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ matrix.node-version }}
           cache: npm
       - run: npm ci
       - run: npm run lint
       - run: npm test
       - run: npm run build
-      - run: node dist/cli.js scan examples/unsafe --fail-on critical
-        continue-on-error: true
+      - run: node dist/cli.js scan examples/safe --fail-on high
+      - run: node dist/cli.js scan . --fail-on high
+      - name: Assert unsafe fixture fails
+        run: |
+          set +e
+          node dist/cli.js scan examples/unsafe --fail-on critical --exclude never-match
+          code=$?
+          set -e
+          test "$code" -eq 1
+      - name: Verify SARIF output
+        run: |
+          set +e
+          node dist/cli.js scan examples/unsafe --format sarif --output reports/agent-secret-guard.sarif --fail-on critical --exclude never-match
+          code=$?
+          set -e
+          test "$code" -eq 1
+          test -s reports/agent-secret-guard.sarif

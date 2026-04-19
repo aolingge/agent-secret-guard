@@ -1,6 +1,6 @@
 {
   "name": "agent-secret-guard",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Dangerous config and secret scanner for AI coding agents, MCP, and local automation projects.",
   "type": "module",
   "packageManager": "npm@10.9.7",
@@ -10,14 +10,21 @@
   "files": [
     "dist",
     "README.md",
+    "CHANGELOG.md",
     "LICENSE",
-    "SECURITY.md"
+    "SECURITY.md",
+    "SUPPORT.md",
+    "CODE_OF_CONDUCT.md"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "check": "npm run lint && npm test && npm run build",
     "test": "vitest run",
     "lint": "tsc -p tsconfig.json --noEmit",
     "scan": "node dist/cli.js scan",
+    "scan:sarif": "node dist/cli.js scan . --format sarif --output reports/agent-secret-guard.sarif",
+    "scan:unsafe": "node dist/cli.js scan examples/unsafe --fail-on critical",
+    "pack:dry": "npm pack --dry-run",
     "prepare": "npm run build",
     "prepack": "npm run build"
   },
