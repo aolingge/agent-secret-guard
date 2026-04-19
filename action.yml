@@ -6,11 +6,11 @@ inputs:
     required: false
     default: .
   fail-on:
-    description: Lowest severity that should fail the action: low, medium, high, or critical.
+    description: "Lowest severity that should fail the action: low, medium, high, or critical."
     required: false
     default: high
   format:
-    description: Output format: text or json.
+    description: "Output format: text or json."
     required: false
     default: text
 runs:
