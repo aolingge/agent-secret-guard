@@ -11,25 +11,19 @@ It is built for repositories that contain files like `.mcp.json`, `mcp.json`, `A
 ## Quick Start
 
 ```bash
-npx github:aolingge/agent-secret-guard scan
+npx agent-secret-guard scan
 ```
 
 Fail CI when high or critical findings are present:
 
 ```bash
-npx github:aolingge/agent-secret-guard scan . --fail-on high
+npx agent-secret-guard scan . --fail-on high
 ```
 
 Print machine-readable output:
 
 ```bash
-npx github:aolingge/agent-secret-guard scan . --format json
-```
-
-The npm package name is reserved in this project metadata. Once npm 2FA publishing is completed, the shorter command will be:
-
-```bash
-npx agent-secret-guard scan
+npx agent-secret-guard scan . --format json
 ```
 
 ## What It Catches
