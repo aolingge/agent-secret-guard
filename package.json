@@ -5,7 +5,7 @@
   "type": "module",
   "packageManager": "npm@10.9.7",
   "bin": {
-    "agent-secret-guard": "./dist/cli.js"
+    "agent-secret-guard": "dist/cli.js"
   },
   "files": [
     "dist",
