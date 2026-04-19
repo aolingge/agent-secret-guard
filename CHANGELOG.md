@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1 - 2026-04-20
+
+- Align the release tag with the final hardened repository state.
+- Fix the OSV-Scanner workflow reference and refresh GitHub Actions versions.
+- Keep npm package behavior unchanged from 0.2.0.
+
 ## 0.2.0 - 2026-04-20
 
 - Add SARIF output for GitHub Code Scanning.

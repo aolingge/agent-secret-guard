@@ -97,7 +97,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: aolingge/agent-secret-guard@v0.2.0
+      - uses: aolingge/agent-secret-guard@v0.2.1
         with:
           fail-on: high
 ```
@@ -121,7 +121,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: aolingge/agent-secret-guard@v0.2.0
+      - uses: aolingge/agent-secret-guard@v0.2.1
         with:
           fail-on: high
           format: sarif
@@ -139,7 +139,7 @@ Install [pre-commit](https://pre-commit.com/) and add this to `.pre-commit-confi
 ```yaml
 repos:
   - repo: https://github.com/aolingge/agent-secret-guard
-    rev: v0.2.0
+    rev: v0.2.1
     hooks:
       - id: agent-secret-guard
 ```
