@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.2 - 2026-04-20
+
+- Improve README positioning, quick-start output, privacy notes, comparison guidance, and remediation links.
+- Add English and Chinese launch kits with release notes, X/LinkedIn/Reddit copy, Chinese community copy, demo scripts, and recommended GitHub topics.
+- Add privacy, remediation, and comparison docs to make the project easier to evaluate and share.
+- Harden issue templates so users are reminded not to paste real secrets into public reports.
+
 ## 0.2.1 - 2026-04-20
 
 - Align the release tag with the final hardened repository state.

@@ -9,9 +9,20 @@ Dangerous config and secret scanner for AI coding agents, MCP, and local automat
 
 ![agent-secret-guard terminal demo](docs/demo.svg)
 
-`agent-secret-guard` is a small CLI that looks for risky agent-era configuration: secrets in MCP args, hardcoded API keys, over-broad filesystem access, dangerous shell commands, browser profile exposure, and credential store leaks.
+`agent-secret-guard` is a 5-minute safety check for agent-era repos. It looks for the places normal secret scanners often miss: MCP command args, AI coding rules, local automation notes, browser profile paths, credential store references, and over-permissive GitHub Actions workflows.
 
-It is built for repositories that contain files like `.mcp.json`, `mcp.json`, `AGENTS.md`, `CLAUDE.md`, `.env`, `settings.json`, `docker-compose.yml`, and GitHub Actions workflows.
+Use it before you publish an AI agent, share a local automation repo, or ask a coding agent to work inside a project with real credentials nearby.
+
+## Why This Exists
+
+AI coding agents and MCP servers make local automation faster, but they also move secrets into new places:
+
+- MCP configs can pass tokens through `args`, where they can leak into process listings and logs.
+- Agent instruction files can contain copied shell commands, broad filesystem paths, or private setup notes.
+- Browser profiles and credential stores can unlock sessions far outside the repo.
+- GitHub Actions can accidentally give package-publishing jobs broad write access.
+
+`agent-secret-guard` turns those patterns into concrete findings with a short explanation and a safer replacement.
 
 ## Quick Start
 
@@ -35,6 +46,13 @@ Generate SARIF for GitHub Code Scanning:
 
 ```bash
 npx agent-secret-guard scan . --format sarif --output agent-secret-guard.sarif --fail-on high
+```
+
+Typical text output:
+
+```text
+HIGH mcp-token-in-args .mcp.json:6
+MCP args include --token. Move the value to an environment variable or secret store.
 ```
 
 ## What It Catches
@@ -97,7 +115,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: aolingge/agent-secret-guard@v0.2.1
+      - uses: aolingge/agent-secret-guard@v0.2.2
         with:
           fail-on: high
 ```
@@ -121,7 +139,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: aolingge/agent-secret-guard@v0.2.1
+      - uses: aolingge/agent-secret-guard@v0.2.2
         with:
           fail-on: high
           format: sarif
@@ -139,7 +157,7 @@ Install [pre-commit](https://pre-commit.com/) and add this to `.pre-commit-confi
 ```yaml
 repos:
   - repo: https://github.com/aolingge/agent-secret-guard
-    rev: v0.2.1
+    rev: v0.2.2
     hooks:
       - id: agent-secret-guard
 ```
@@ -187,6 +205,18 @@ npx agent-secret-guard scan . --exclude examples/unsafe/**
 
 This tool focuses on agent-specific configuration risks that are easy to miss in normal secret scanning: MCP command args, browser profile exposure, credential store paths, broad filesystem roots, and dangerous automation instructions.
 
+See [docs/comparison.md](docs/comparison.md) for a practical comparison with other scanners.
+
+## Privacy Model
+
+The CLI scans local files and prints local reports. It does not call a remote service, upload findings, or verify credentials against providers. Findings are redacted where possible, but SARIF/JSON/text reports may still contain private file paths and surrounding evidence, so treat reports as sensitive artifacts.
+
+See [docs/privacy.md](docs/privacy.md) for the full data-handling note.
+
+## Fix Guide
+
+Found something? Start with [docs/remediation.md](docs/remediation.md). It explains how to rotate exposed tokens, move MCP secrets into environment variables, narrow filesystem access, and harden GitHub Actions permissions.
+
 ## Development
 
 ```bash
@@ -206,6 +236,8 @@ node dist/cli.js scan examples/unsafe --fail-on high
 ## Publishing
 
 Future npm releases are designed to run through GitHub Actions Trusted Publishing, so maintainers do not need to keep entering local npm 2FA prompts. See [docs/publishing.md](docs/publishing.md).
+
+Maintainers can use [docs/launch-kit.md](docs/launch-kit.md) for release notes, X/LinkedIn/Reddit copy, and a short demo script. Chinese launch copy is available in [docs/launch-kit.zh-CN.md](docs/launch-kit.zh-CN.md).
 
 ## Roadmap
 

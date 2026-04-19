@@ -7,7 +7,7 @@ body:
     id: pattern
     attributes:
       label: Risk pattern
-      description: What unsafe pattern should be detected?
+      description: What unsafe pattern should be detected? Use fake examples only.
     validations:
       required: true
   - type: textarea
@@ -17,3 +17,11 @@ body:
       description: What should users do instead?
     validations:
       required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Files or tools affected
+      description: Which MCP client, agent config, workflow file, or automation tool uses this pattern?
+      placeholder: ".mcp.json, .cursor/rules/*.mdc, AGENTS.md, GitHub Actions, etc."
+    validations:
+      required: false

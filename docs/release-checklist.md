@@ -7,7 +7,7 @@
 5. Run `node dist/cli.js scan examples/unsafe --fail-on critical --exclude never-match` and confirm it exits with code 1.
 6. Run `node dist/cli.js scan examples/unsafe --format sarif --output reports/agent-secret-guard.sarif --fail-on critical --exclude never-match` and confirm a SARIF file is written.
 7. Run `npm pack --dry-run`.
-8. Create a signed or normal git tag such as `v0.2.1`.
+8. Create a signed or normal git tag such as `v0.2.2`.
 9. Push `main` and the version tag.
 10. Confirm the `Publish npm` workflow publishes from GitHub Actions.
 11. Create or update the GitHub release with the changelog notes.

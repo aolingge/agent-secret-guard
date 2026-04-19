@@ -14,7 +14,19 @@ body:
     id: repro
     attributes:
       label: Reproduction
-      description: Provide a minimal fixture with fake tokens only.
+      description: Provide a minimal fixture with fake tokens only. Do not paste real secrets, private paths, cookies, or full scan reports.
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - False positive
+        - False negative
+        - CLI behavior
+        - GitHub Action behavior
+        - Documentation
     validations:
       required: true
   - type: textarea

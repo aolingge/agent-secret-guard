@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/aolingge/agent-secret-guard/security/policy
+    about: Please report real vulnerabilities privately. Do not open public issues with real secrets.
+  - name: Remediation guide
+    url: https://github.com/aolingge/agent-secret-guard/blob/main/docs/remediation.md
+    about: Start here if the scanner found a risky pattern and you need a safer replacement.
