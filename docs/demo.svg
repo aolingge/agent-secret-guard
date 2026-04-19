@@ -1,0 +1,19 @@
+<svg width="980" height="520" viewBox="0 0 980 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">agent-secret-guard terminal demo</title>
+  <desc id="desc">A terminal report showing critical and high findings for unsafe MCP and agent configuration.</desc>
+  <rect width="980" height="520" rx="8" fill="#101418"/>
+  <rect x="28" y="28" width="924" height="464" rx="8" fill="#151B21" stroke="#2D3742"/>
+  <circle cx="58" cy="58" r="7" fill="#FF5F57"/>
+  <circle cx="82" cy="58" r="7" fill="#FFBD2E"/>
+  <circle cx="106" cy="58" r="7" fill="#28C840"/>
+  <text x="44" y="108" fill="#D8DEE9" font-family="Consolas, Monaco, monospace" font-size="22">$ npx agent-secret-guard scan examples/unsafe --fail-on high</text>
+  <text x="44" y="154" fill="#A7B0BA" font-family="Consolas, Monaco, monospace" font-size="20">agent-secret-guard scan report</text>
+  <text x="44" y="190" fill="#A7B0BA" font-family="Consolas, Monaco, monospace" font-size="20">Scanned files: 2</text>
+  <text x="44" y="226" fill="#FF6B6B" font-family="Consolas, Monaco, monospace" font-size="20">Findings: 5 (2 critical, 3 high, 0 medium, 0 low)</text>
+  <text x="44" y="282" fill="#FF6B6B" font-family="Consolas, Monaco, monospace" font-size="20">[CRITICAL] MCP token passed through args</text>
+  <text x="44" y="318" fill="#D8DEE9" font-family="Consolas, Monaco, monospace" font-size="20">Rule: mcp-token-in-args</text>
+  <text x="44" y="354" fill="#D8DEE9" font-family="Consolas, Monaco, monospace" font-size="20">Location: .mcp.json:8</text>
+  <text x="44" y="390" fill="#D8DEE9" font-family="Consolas, Monaco, monospace" font-size="20">Evidence: sk-t...cdef</text>
+  <text x="44" y="426" fill="#8FBCBB" font-family="Consolas, Monaco, monospace" font-size="20">Fix: Move it to environment injection.</text>
+  <text x="44" y="462" fill="#8FBCBB" font-family="Consolas, Monaco, monospace" font-size="20">Safe: "env": { "SERVICE_TOKEN": "${SERVICE_TOKEN}" }</text>
+</svg>

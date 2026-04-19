@@ -1,0 +1,20 @@
+name: Agent Secret Guard
+description: Scan AI agent, MCP, and local automation config for dangerous secrets and permissions.
+inputs:
+  path:
+    description: Path to scan.
+    required: false
+    default: .
+  fail-on:
+    description: Lowest severity that should fail the action: low, medium, high, or critical.
+    required: false
+    default: high
+  format:
+    description: Output format: text or json.
+    required: false
+    default: text
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: npx --yes agent-secret-guard scan "${{ inputs.path }}" --fail-on "${{ inputs.fail-on }}" --format "${{ inputs.format }}"

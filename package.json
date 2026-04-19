@@ -1,0 +1,54 @@
+{
+  "name": "agent-secret-guard",
+  "version": "0.1.0",
+  "description": "Dangerous config and secret scanner for AI coding agents, MCP, and local automation projects.",
+  "type": "module",
+  "packageManager": "npm@10.9.7",
+  "bin": {
+    "agent-secret-guard": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "scan": "node dist/cli.js scan",
+    "prepack": "npm run build"
+  },
+  "keywords": [
+    "ai-agent",
+    "mcp",
+    "security",
+    "secret-scanning",
+    "developer-tools",
+    "cli",
+    "codex",
+    "claude-code"
+  ],
+  "author": "aolingge",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aolingge/agent-secret-guard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aolingge/agent-secret-guard/issues"
+  },
+  "homepage": "https://github.com/aolingge/agent-secret-guard#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2",
+    "vitest": "^4.1.4"
+  }
+}

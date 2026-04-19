@@ -1,0 +1,6 @@
+- id: agent-secret-guard
+  name: agent-secret-guard
+  description: Scan AI agent, MCP, and local automation config for dangerous secrets and permissions.
+  entry: npx --yes agent-secret-guard scan . --fail-on high
+  language: system
+  pass_filenames: false

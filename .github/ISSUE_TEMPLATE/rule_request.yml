@@ -1,0 +1,19 @@
+name: Rule request
+description: Suggest a new AI agent, MCP, or automation risk rule.
+title: "[Rule]: "
+labels: ["enhancement", "rules"]
+body:
+  - type: textarea
+    id: pattern
+    attributes:
+      label: Risk pattern
+      description: What unsafe pattern should be detected?
+    validations:
+      required: true
+  - type: textarea
+    id: safe
+    attributes:
+      label: Safe alternative
+      description: What should users do instead?
+    validations:
+      required: true

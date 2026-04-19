@@ -1,0 +1,12 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">agent-secret-guard social preview</title>
+  <desc id="desc">Social preview for agent-secret-guard, a security scanner for AI coding agents and MCP projects.</desc>
+  <rect width="1280" height="640" fill="#11161C"/>
+  <rect x="84" y="80" width="1112" height="480" rx="8" fill="#161D24" stroke="#31404D" stroke-width="2"/>
+  <path d="M148 172H248M148 222H360M148 272H312" stroke="#8FBCBB" stroke-width="18" stroke-linecap="round"/>
+  <path d="M984 168L1096 232L984 296L872 232L984 168Z" fill="#F4D35E"/>
+  <path d="M984 208L1050 246L984 284L918 246L984 208Z" fill="#11161C"/>
+  <text x="148" y="388" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="78" font-weight="700">agent-secret-guard</text>
+  <text x="148" y="456" fill="#B8C4CF" font-family="Inter, Arial, sans-serif" font-size="34">Scan risky MCP, AI agent, and local automation config</text>
+  <text x="148" y="510" fill="#FF6B6B" font-family="Consolas, Monaco, monospace" font-size="28">MCP args tokens • browser profiles • credential stores • dangerous shell</text>
+</svg>
