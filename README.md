@@ -142,6 +142,10 @@ npm run build
 node dist/cli.js scan examples/unsafe --fail-on high
 ```
 
+## Publishing
+
+Future npm releases are designed to run through GitHub Actions Trusted Publishing, so maintainers do not need to keep entering local npm 2FA prompts. See [docs/publishing.md](docs/publishing.md).
+
 ## Roadmap
 
 - More MCP client formats and schema-aware checks.
