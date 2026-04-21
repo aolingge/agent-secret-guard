@@ -10,6 +10,7 @@
   "files": [
     "dist",
     "docs",
+    "scripts",
     "README.md",
     "README.*.md",
     "CHANGELOG.md",
@@ -19,14 +20,16 @@
     "CODE_OF_CONDUCT.md"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "node ./node_modules/typescript/bin/tsc -p tsconfig.json",
     "check": "npm run lint && npm test && npm run build",
     "test": "vitest run",
-    "lint": "tsc -p tsconfig.json --noEmit",
+    "lint": "node ./node_modules/typescript/bin/tsc -p tsconfig.json --noEmit",
     "scan": "node dist/cli.js scan",
     "scan:sarif": "node dist/cli.js scan . --format sarif --output reports/agent-secret-guard.sarif",
     "scan:unsafe": "node dist/cli.js scan examples/unsafe --fail-on critical",
-    "pack:dry": "npm pack --dry-run",
+    "github:digest": "node scripts/maintenance-digest.mjs",
+    "github:governance": "node scripts/configure-github-governance.mjs",
+    "pack:dry": "node scripts/pack-dry-run.mjs",
     "prepare": "npm run build",
     "prepack": "npm run build"
   },
