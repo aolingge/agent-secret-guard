@@ -100,6 +100,26 @@ Safer config:
 }
 ```
 
+## Examples
+
+The [`examples`](examples/) directory contains copyable safe patterns and intentionally unsafe fixtures:
+
+- [`examples/safe`](examples/safe/) uses environment-variable injection and a scoped workspace path.
+- [`examples/unsafe`](examples/unsafe/) contains risky MCP args and agent instructions for scanner tests.
+- [`examples/ci/agent-secret-guard.yml`](examples/ci/agent-secret-guard.yml) shows a minimal GitHub Actions integration.
+
+Try the safe fixture:
+
+```bash
+npx agent-secret-guard scan examples/safe --fail-on high
+```
+
+The unsafe fixture is excluded from normal repository scans. To test the failure path explicitly, override the exclusion:
+
+```bash
+npx agent-secret-guard scan examples/unsafe --fail-on critical --exclude never-match
+```
+
 ## GitHub Action
 
 Create `.github/workflows/agent-secret-guard.yml`:
@@ -242,6 +262,12 @@ Future npm releases are designed to run through GitHub Actions Trusted Publishin
 Maintainer automation, branch protection, Dependabot auto-merge, and repository health checks are documented in [docs/github-maintenance.md](docs/github-maintenance.md).
 
 Maintainers can use [docs/launch-kit.md](docs/launch-kit.md) for release notes, X/LinkedIn/Reddit copy, and a short demo script. Chinese launch copy is available in [docs/launch-kit.zh-CN.md](docs/launch-kit.zh-CN.md).
+
+Use [docs/growth-checklist.md](docs/growth-checklist.md) before a public launch. It keeps the repository page, npm page, demo, release notes, and community posts aligned around one narrow promise.
+
+## GitHub Actions Marketplace
+
+This repository includes a composite action for direct use from GitHub Actions. The dedicated Marketplace wrapper is [`aolingge/agent-secret-guard-action`](https://github.com/aolingge/agent-secret-guard-action); see [docs/marketplace-action.md](docs/marketplace-action.md) for the wrapper layout and release checklist.
 
 ## Roadmap
 

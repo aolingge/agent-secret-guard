@@ -110,4 +110,26 @@ describe("runCli", () => {
     expect(exitCode).toBe(0);
     expect(JSON.parse(writes.join(""))).toMatchObject({ scannedFiles: 1, findings: [] });
   });
+
+  test("keeps the safe examples clean", async () => {
+    const writes: string[] = [];
+    const exitCode = await runCli(["scan", "examples/safe", "--format", "json", "--fail-on", "high"], {
+      stdout: (value) => writes.push(value),
+      stderr: (value) => writes.push(value)
+    });
+
+    expect(exitCode).toBe(0);
+    expect(JSON.parse(writes.join(""))).toMatchObject({ findings: [] });
+  });
+
+  test("keeps the unsafe examples covered by the scanner", async () => {
+    const writes: string[] = [];
+    const exitCode = await runCli(["scan", "examples/unsafe", "--fail-on", "critical", "--exclude", "never-match"], {
+      stdout: (value) => writes.push(value),
+      stderr: (value) => writes.push(value)
+    });
+
+    expect(exitCode).toBe(1);
+    expect(writes.join("")).toContain("mcp-token-in-args");
+  });
 });

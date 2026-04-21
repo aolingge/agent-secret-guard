@@ -38,7 +38,7 @@ npx agent-secret-guard scan . --fail-on high
 ## X Post
 
 ```text
-I built agent-secret-guard: a small CLI that scans AI coding agent, MCP, and local automation repos for risky config.
+I built agent-secret-guard: a small CLI + GitHub Action that scans AI coding agent, MCP, and local automation repos for risky config.
 
 It catches things normal secret scans often miss:
 - tokens in MCP args
@@ -50,6 +50,7 @@ It catches things normal secret scans often miss:
 npx agent-secret-guard scan . --fail-on high
 
 https://github.com/aolingge/agent-secret-guard
+https://github.com/marketplace/actions/agent-secret-guard
 ```
 
 ## X Thread
@@ -81,6 +82,9 @@ It also supports JSON and SARIF for GitHub Code Scanning.
 5/ Repo:
 https://github.com/aolingge/agent-secret-guard
 
+Marketplace:
+https://github.com/marketplace/actions/agent-secret-guard
+
 Feedback and rule requests are welcome, especially for MCP clients and AI coding workflows I have not covered yet.
 ```
 
@@ -110,6 +114,9 @@ The project is designed to complement established scanners such as GitHub Secret
 
 Repo:
 https://github.com/aolingge/agent-secret-guard
+
+GitHub Action:
+https://github.com/marketplace/actions/agent-secret-guard
 ```
 
 ## Reddit / Show HN
@@ -149,6 +156,9 @@ This is meant to complement tools like GitHub Secret Scanning, gitleaks, Truffle
 
 Feedback and rule requests are very welcome:
 https://github.com/aolingge/agent-secret-guard
+
+GitHub Action:
+https://github.com/marketplace/actions/agent-secret-guard
 ````
 
 ## 60-second demo script
