@@ -6,9 +6,32 @@ updates:
       interval: weekly
       day: monday
       time: "04:00"
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - npm
+      - automated-pr
+    commit-message:
+      prefix: chore(deps)
+      prefix-development: chore(deps-dev)
+      include: scope
+    cooldown:
+      semver-major-days: 14
+      semver-minor-days: 3
+      semver-patch-days: 0
     groups:
-      npm-development:
+      npm-development-patch:
         dependency-type: development
+        update-types:
+          - patch
+      npm-development-minor:
+        dependency-type: development
+        update-types:
+          - minor
+      npm-development-major:
+        dependency-type: development
+        update-types:
+          - major
 
   - package-ecosystem: github-actions
     directory: /
@@ -16,3 +39,17 @@ updates:
       interval: weekly
       day: monday
       time: "04:30"
+    open-pull-requests-limit: 3
+    labels:
+      - dependencies
+      - github-actions
+      - needs-human-review
+    commit-message:
+      prefix: chore(actions)
+      include: scope
+    cooldown:
+      default-days: 3
+    groups:
+      github-actions:
+        patterns:
+          - "*"

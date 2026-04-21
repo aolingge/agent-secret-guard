@@ -259,6 +259,8 @@ node dist/cli.js scan examples/unsafe --fail-on high
 
 Future npm releases are designed to run through GitHub Actions Trusted Publishing, so maintainers do not need to keep entering local npm 2FA prompts. See [docs/publishing.md](docs/publishing.md).
 
+Maintainer automation, branch protection, Dependabot auto-merge, and repository health checks are documented in [docs/github-maintenance.md](docs/github-maintenance.md).
+
 Maintainers can use [docs/launch-kit.md](docs/launch-kit.md) for release notes, X/LinkedIn/Reddit copy, and a short demo script. Chinese launch copy is available in [docs/launch-kit.zh-CN.md](docs/launch-kit.zh-CN.md).
 
 Use [docs/growth-checklist.md](docs/growth-checklist.md) before a public launch. It keeps the repository page, npm page, demo, release notes, and community posts aligned around one narrow promise.

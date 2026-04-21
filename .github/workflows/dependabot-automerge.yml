@@ -1,0 +1,78 @@
+name: Dependabot Auto-Merge
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dependabot:
+    name: dependabot
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'aolingge/agent-secret-guard'
+    steps:
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@d7267f607e9d3fb96fc2fbe83e0af444713e90b7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check branch protection
+        id: protection
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          count="$(gh api "repos/${REPOSITORY}/branches/${BASE_BRANCH}/protection/required_status_checks" --jq '((.checks // []) | length) + ((.contexts // []) | length)' 2>/dev/null || echo 0)"
+          if [ "${count}" -gt 0 ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Decide eligibility
+        id: eligibility
+        env:
+          ECOSYSTEM: ${{ steps.metadata.outputs.package-ecosystem }}
+          DEPENDENCY_TYPE: ${{ steps.metadata.outputs.dependency-type }}
+          UPDATE_TYPE: ${{ steps.metadata.outputs.update-type }}
+          BRANCH_PROTECTION_READY: ${{ steps.protection.outputs.ready }}
+        run: |
+          set -euo pipefail
+          if [ "${ECOSYSTEM}" = "npm_and_yarn" ] &&
+             [ "${DEPENDENCY_TYPE}" = "direct:development" ] &&
+             [ "${UPDATE_TYPE}" = "version-update:semver-patch" ]; then
+            echo "eligible=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "eligible=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          if [ "${BRANCH_PROTECTION_READY}" != "true" ]; then
+            echo "Branch protection with required status checks is not ready." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Stop if branch protection is missing
+        if: steps.eligibility.outputs.eligible == 'true' && steps.protection.outputs.ready != 'true'
+        run: |
+          echo "Refusing to auto-merge until main has required status checks." >&2
+          exit 1
+
+      - name: Approve and enable auto-merge
+        if: steps.eligibility.outputs.eligible == 'true' && steps.protection.outputs.ready == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          set -euo pipefail
+          gh pr review --approve "$PR_URL" --body "Auto-approved: Dependabot npm development patch update with required checks enforced."
+          gh pr merge --auto --squash --delete-branch "$PR_URL"
+          echo "Auto-merge enabled for ${PR_URL}." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Mark human review path
+        if: steps.eligibility.outputs.eligible != 'true'
+        run: |
+          echo "This Dependabot PR is not eligible for automatic merge and should be reviewed by a maintainer." >> "$GITHUB_STEP_SUMMARY"
