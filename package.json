@@ -10,7 +10,6 @@
   "files": [
     "dist",
     "docs",
-    "scripts",
     "examples",
     "README.md",
     "README.*.md",
