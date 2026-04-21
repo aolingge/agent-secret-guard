@@ -1,7 +1,6 @@
-import { defineConfig } from "vitest/config";
-
-export default defineConfig({
+export default {
   test: {
-    include: ["tests/**/*.test.ts"]
+    include: ["tests/**/*.test.ts"],
+    pool: "threads"
   }
-});
+};

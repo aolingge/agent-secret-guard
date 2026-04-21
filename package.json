@@ -10,6 +10,7 @@
   "files": [
     "dist",
     "docs",
+    "examples",
     "README.md",
     "README.*.md",
     "CHANGELOG.md",
@@ -32,15 +33,21 @@
   },
   "keywords": [
     "ai-agent",
+    "ai-agent-security",
     "mcp",
+    "mcp-security",
     "security",
     "secret-scanning",
     "secret-scanner",
+    "security-tools",
     "developer-tools",
     "cli",
     "github-actions",
+    "github-action",
     "sarif",
     "mcp-server",
+    "local-automation",
+    "local-first",
     "i18n",
     "codex",
     "claude-code"
@@ -54,7 +61,7 @@
   "bugs": {
     "url": "https://github.com/aolingge/agent-secret-guard/issues"
   },
-  "homepage": "https://github.com/aolingge/agent-secret-guard#readme",
+  "homepage": "https://www.npmjs.com/package/agent-secret-guard",
   "publishConfig": {
     "access": "public"
   },
