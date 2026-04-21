@@ -61,7 +61,7 @@
   "bugs": {
     "url": "https://github.com/aolingge/agent-secret-guard/issues"
   },
-  "homepage": "https://www.npmjs.com/package/agent-secret-guard",
+  "homepage": "https://aolingge.dev/agent-secret-guard/",
   "publishConfig": {
     "access": "public"
   },

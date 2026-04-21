@@ -15,7 +15,7 @@ agent-secret-guard is a 5-minute safety check for AI agent, MCP, and local autom
 - The demo image or video shows an unsafe config, a finding, and a safer replacement.
 - Badges link to npm, CI, security workflow, and license.
 - Topics include `ai-agent`, `mcp`, `secret-scanning`, `security-tools`, `github-actions`, `sarif`, `cli`, `developer-tools`, `codex`, and `claude-code`.
-- GitHub repo homepage points to the best current conversion page. Use the npm package page until a dedicated website exists.
+- GitHub repo homepage points to the best current conversion page: `https://aolingge.dev/agent-secret-guard/`.
 - Community files exist: `LICENSE`, `SECURITY.md`, `CONTRIBUTING.md`, issue templates, pull request template, support notes, and code of conduct.
 
 ## Package Page
@@ -55,4 +55,3 @@ Track only a few signals:
 - Comments or rule requests from developers.
 - Failed install or quick-start feedback.
 - One small packaging improvement for the next week.
-

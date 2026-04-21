@@ -265,7 +265,7 @@ Use [docs/growth-checklist.md](docs/growth-checklist.md) before a public launch.
 
 ## GitHub Actions Marketplace
 
-This repository includes a composite action for direct use from GitHub Actions. For GitHub Actions Marketplace publishing, keep the main CLI package here and use [docs/marketplace-action.md](docs/marketplace-action.md) to prepare a thin wrapper repository with action-focused metadata, release notes, and marketplace copy.
+This repository includes a composite action for direct use from GitHub Actions. The dedicated Marketplace wrapper is [`aolingge/agent-secret-guard-action`](https://github.com/aolingge/agent-secret-guard-action); see [docs/marketplace-action.md](docs/marketplace-action.md) for the wrapper layout and release checklist.
 
 ## Roadmap
 

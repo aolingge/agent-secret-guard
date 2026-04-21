@@ -9,7 +9,7 @@ The main `agent-secret-guard` repository is optimized for the npm CLI package. I
     fail-on: high
 ```
 
-For GitHub Actions Marketplace, keep this repository as the CLI source of truth and create a thin wrapper repository named `agent-secret-guard-action`.
+For GitHub Actions Marketplace, keep this repository as the CLI source of truth and use the thin wrapper repository [`aolingge/agent-secret-guard-action`](https://github.com/aolingge/agent-secret-guard-action).
 
 ## Why a Wrapper Repository
 
@@ -67,14 +67,13 @@ npx agent-secret-guard@0.2.3 scan ...
 
 ## Marketplace Release Checklist
 
-1. Create the wrapper repository as public.
-2. Add action metadata with `branding`.
-3. Add README with a 5-line Quick Start and link back to this CLI repository.
-4. Add `LICENSE` and `SECURITY.md`.
+1. Confirm the wrapper repository is public.
+2. Confirm action metadata includes `branding`.
+3. Confirm README has a 5-line Quick Start and links back to this CLI repository.
+4. Confirm `LICENSE` and `SECURITY.md` exist.
 5. Tag the first release.
 6. Draft GitHub Marketplace listing copy:
    - Category: Security.
    - One-liner: Scan AI agent, MCP, and local automation repos for risky secrets and permissions.
    - Primary link: `https://github.com/aolingge/agent-secret-guard`.
 7. After publishing, add the Marketplace link to this repository README and `docs/growth-checklist.md`.
-
