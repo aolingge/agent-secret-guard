@@ -58,7 +58,12 @@ Generate SARIF for GitHub Code Scanning:
 npx agent-secret-guard scan . --format sarif --output agent-secret-guard.sarif --fail-on high
 ```
 
+<<<<<<< Updated upstream
 Prefer a copyable workflow? Use the dedicated [gent-secret-guard-action](https://github.com/aolingge/agent-secret-guard-action) wrapper for a short Marketplace setup path.
+||||||| Stash base
+=======
+Prefer a copyable workflow? Use the dedicated [`agent-secret-guard-action`](https://github.com/aolingge/agent-secret-guard-action) wrapper for a short Marketplace setup path.
+>>>>>>> Stashed changes
 
 Typical text output:
 
