@@ -2,7 +2,7 @@
 
 Read this in your language: English | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Español](README.es.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Português](README.pt.md) | [Русский](README.ru.md) | [العربية](README.ar.md) | [हिन्दी](README.hi.md) | [Bahasa Indonesia](README.id.md)
 
-Dangerous config and secret scanner for AI coding agents, MCP, and local automation projects.
+5-minute safety scanner for AI agent repos, MCP configs, local automation notes, and risky GitHub Actions permissions.
 
 [![npm version](https://img.shields.io/npm/v/agent-secret-guard.svg)](https://www.npmjs.com/package/agent-secret-guard)
 [![CI](https://github.com/aolingge/agent-secret-guard/actions/workflows/ci.yml/badge.svg)](https://github.com/aolingge/agent-secret-guard/actions/workflows/ci.yml)
@@ -13,7 +13,13 @@ Dangerous config and secret scanner for AI coding agents, MCP, and local automat
 
 `agent-secret-guard` is a 5-minute safety check for agent-era repos. It looks for the places normal secret scanners often miss: MCP command args, AI coding rules, local automation notes, browser profile paths, credential store references, and over-permissive GitHub Actions workflows.
 
-Use it before you publish an AI agent, share a local automation repo, or ask a coding agent to work inside a project with real credentials nearby.
+Use it before you publish an AI agent, share a local automation repo, ask a coding agent to work near real credentials, or open a pull request that touches CI/CD environment variables.
+
+Good first checks:
+
+- Before commit or PR: `npx agent-secret-guard scan . --fail-on high`
+- In GitHub Actions: add the [Marketplace Action](https://github.com/marketplace/actions/agent-secret-guard)
+- For agent-generated changes: scan after the agent edits files and before you copy logs or release notes into public channels
 
 ## Why This Exists
 
@@ -27,6 +33,8 @@ AI coding agents and MCP servers make local automation faster, but they also mov
 `agent-secret-guard` turns those patterns into concrete findings with a short explanation and a safer replacement.
 
 ## Quick Start
+
+Run the local check:
 
 ```bash
 npx agent-secret-guard scan
@@ -49,6 +57,8 @@ Generate SARIF for GitHub Code Scanning:
 ```bash
 npx agent-secret-guard scan . --format sarif --output agent-secret-guard.sarif --fail-on high
 ```
+
+Prefer a copyable workflow? Use the dedicated [gent-secret-guard-action](https://github.com/aolingge/agent-secret-guard-action) wrapper for a short Marketplace setup path.
 
 Typical text output:
 

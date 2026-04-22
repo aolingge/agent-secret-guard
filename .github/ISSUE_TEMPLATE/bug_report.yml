@@ -16,7 +16,54 @@ body:
       label: Reproduction
       description: Provide a minimal fixture with fake tokens only. Do not paste real secrets, private paths, cookies, or full scan reports.
     validations:
-      required: true
+      required: true  - type: input
+    id: version
+    attributes:
+      label: agent-secret-guard version
+      description: Run `npx agent-secret-guard --version` or share the npm/action version you used.
+      placeholder: "0.2.3"
+    validations:
+      required: false
+  - type: input
+    id: command
+    attributes:
+      label: Command or action step
+      description: Share the exact command or GitHub Actions step, with fake paths and fake tokens only.
+      placeholder: "npx agent-secret-guard scan . --fail-on high"
+    validations:
+      required: false
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Runtime
+      options:
+        - Local CLI
+        - GitHub Action
+        - pre-commit
+        - Other
+    validations:
+      required: false
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - GitHub-hosted runner
+        - Self-hosted runner
+        - Other
+    validations:
+      required: false
+  - type: textarea
+    id: output
+    attributes:
+      label: Minimal output
+      description: Paste only the smallest redacted output needed to understand the issue.
+      render: text
+    validations:
+      required: false
   - type: dropdown
     id: category
     attributes:
