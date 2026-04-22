@@ -16,14 +16,8 @@ body:
       label: Reproduction
       description: Provide a minimal fixture with fake tokens only. Do not paste real secrets, private paths, cookies, or full scan reports.
     validations:
-<<<<<<< Updated upstream
-      required: true  - type: input
-||||||| Stash base
-      required: true
-=======
       required: true
   - type: input
->>>>>>> Stashed changes
     id: version
     attributes:
       label: agent-secret-guard version
