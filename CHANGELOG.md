@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Add direct support links for bug reports, rule requests, agent-task requests, remediation guidance, and security reporting.
+- Align the npm package description with the README first-screen positioning for clearer package-page discovery.
+
 ## 0.2.3 - 2026-04-20
 
 - Add multilingual README switcher and localized README landing pages for Simplified Chinese, Traditional Chinese, Japanese, Korean, Spanish, French, German, Portuguese, Russian, Arabic, Hindi, and Indonesian.

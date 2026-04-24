@@ -15,6 +15,8 @@ Read this in your language: English | [简体中文](README.zh-CN.md) | [繁體�
 
 Use it before you publish an AI agent, share a local automation repo, ask a coding agent to work near real credentials, or open a pull request that touches CI/CD environment variables.
 
+Need a quick asset map before sharing a repo? Start with [docs/agent-surface-inventory.md](docs/agent-surface-inventory.md).
+
 Good first checks:
 
 - Before commit or PR: `npx agent-secret-guard scan . --fail-on high`
@@ -249,6 +251,8 @@ See [docs/privacy.md](docs/privacy.md) for the full data-handling note.
 
 Found something? Start with [docs/remediation.md](docs/remediation.md). It explains how to rotate exposed tokens, move MCP secrets into environment variables, narrow filesystem access, and harden GitHub Actions permissions.
 
+If you want to list what an agent can reach before it becomes a finding, use [docs/agent-surface-inventory.md](docs/agent-surface-inventory.md).
+
 ## Development
 
 ```bash
@@ -294,5 +298,13 @@ This tool reports suspicious values and tries to redact secret evidence. Do not 
 
 MIT
 ## Support
+
+Need the right path?
+
+- Report a scanner bug or false positive: [Bug report](https://github.com/aolingge/agent-secret-guard/issues/new?template=bug_report.yml)
+- Suggest a new detection: [Rule request](https://github.com/aolingge/agent-secret-guard/issues/new?template=rule_request.yml)
+- Open a tightly scoped implementation task: [Agent task](https://github.com/aolingge/agent-secret-guard/issues/new?template=agent_task.yml)
+- Start with fixes first: [Remediation guide](docs/remediation.md)
+- Handling sensitive reports: [SECURITY.md](SECURITY.md)
 
 If this project saves you time, you can support future maintenance here: [Buy Me a Coffee](https://www.buymeacoffee.com/aolingge).
