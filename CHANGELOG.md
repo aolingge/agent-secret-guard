@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add `docs/agent-surface-inventory.md` as a short pre-scan checklist for MCP args, browser access, credential stores, filesystem scope, and CI permissions.
 - Add direct support links for bug reports, rule requests, agent-task requests, remediation guidance, and security reporting.
 - Align the npm package description with the README first-screen positioning for clearer package-page discovery.
 - Add a README "Choose Your Path" table so new visitors can reach the fastest scan, action, examples, comparison guide, and remediation guide from one block.
