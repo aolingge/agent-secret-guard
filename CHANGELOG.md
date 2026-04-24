@@ -4,6 +4,7 @@
 
 - Add direct support links for bug reports, rule requests, agent-task requests, remediation guidance, and security reporting.
 - Align the npm package description with the README first-screen positioning for clearer package-page discovery.
+- Add a README "Choose Your Path" table so new visitors can reach the fastest scan, action, examples, comparison guide, and remediation guide from one block.
 
 ## 0.2.3 - 2026-04-20
 

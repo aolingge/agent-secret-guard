@@ -62,6 +62,16 @@ npx agent-secret-guard scan . --format sarif --output agent-secret-guard.sarif -
 
 Prefer a copyable workflow? Use the dedicated [`agent-secret-guard-action`](https://github.com/aolingge/agent-secret-guard-action) wrapper for a short Marketplace setup path.
 
+## Choose Your Path
+
+| Goal | Start here |
+| --- | --- |
+| Check a local repo before commit or PR | `npx agent-secret-guard scan . --fail-on high` |
+| Add a short GitHub Actions setup | Use the [`agent-secret-guard-action`](https://github.com/aolingge/agent-secret-guard-action) wrapper or copy [`examples/ci/agent-secret-guard.yml`](examples/ci/agent-secret-guard.yml). |
+| See one safe example and one failing example | Start with [`examples/safe`](examples/safe/) and [`examples/unsafe`](examples/unsafe/). |
+| Compare it with broader secret scanners | Read [docs/comparison.md](docs/comparison.md). |
+| Fix findings safely after a scan | Start with [docs/remediation.md](docs/remediation.md). |
+
 Typical text output:
 
 ```text
@@ -299,7 +309,7 @@ This tool reports suspicious values and tries to redact secret evidence. Do not 
 MIT
 ## Support
 
-Need the right path?
+Need the right path for feedback or fixes?
 
 - Report a scanner bug or false positive: [Bug report](https://github.com/aolingge/agent-secret-guard/issues/new?template=bug_report.yml)
 - Suggest a new detection: [Rule request](https://github.com/aolingge/agent-secret-guard/issues/new?template=rule_request.yml)
