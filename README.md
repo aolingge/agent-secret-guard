@@ -17,6 +17,8 @@ Use it before you publish an AI agent, share a local automation repo, ask a codi
 
 Need a quick asset map before sharing a repo? Start with [docs/agent-surface-inventory.md](docs/agent-surface-inventory.md).
 
+Need a human launch-readiness check? I offer a focused [AI Agent Repo Safety Audit](docs/ai-agent-repo-safety-audit.md) for agent, MCP, GitHub Actions, and local automation repositories. See the [sample report](docs/sample-audit-report.md) and [outreach kit](docs/outreach-kit.md).
+
 Good first checks:
 
 - Before commit or PR: `npx agent-secret-guard scan . --fail-on high`
@@ -315,6 +317,7 @@ Need the right path for feedback or fixes?
 - Suggest a new detection: [Rule request](https://github.com/aolingge/agent-secret-guard/issues/new?template=rule_request.yml)
 - Open a tightly scoped implementation task: [Agent task](https://github.com/aolingge/agent-secret-guard/issues/new?template=agent_task.yml)
 - Start with fixes first: [Remediation guide](docs/remediation.md)
+- Book a focused launch-readiness audit: [AI Agent Repo Safety Audit](docs/ai-agent-repo-safety-audit.md)
 - Handling sensitive reports: [SECURITY.md](SECURITY.md)
 
 If this project saves you time, you can support future maintenance here: [Buy Me a Coffee](https://www.buymeacoffee.com/aolingge).
