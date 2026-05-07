@@ -8,6 +8,7 @@
     "strict": true,
     "declaration": true,
     "sourceMap": true,
+    "types": ["node"],
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
