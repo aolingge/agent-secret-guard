@@ -1,4 +1,4 @@
-import { readdir, readFile, stat } from "node:fs/promises";
+import { open, readdir } from "node:fs/promises";
 import { join, relative } from "node:path";
 import { scanFileWithRules } from "./rules.js";
 import type { Finding, ScanFile, ScanResult, ScanTargetInput } from "./types.js";
@@ -84,13 +84,16 @@ async function walk(root: string, current: string, files: ScanFile[], excludePat
       continue;
     }
 
-    const fileStat = await stat(absolutePath);
-    if (fileStat.size > MAX_FILE_BYTES) {
-      continue;
+    const file = await open(absolutePath, "r");
+    try {
+      const fileStat = await file.stat();
+      if (fileStat.size <= MAX_FILE_BYTES) {
+        const content = await file.readFile("utf8");
+        files.push({ path: relativePath, content });
+      }
+    } finally {
+      await file.close();
     }
-
-    const content = await readFile(absolutePath, "utf8");
-    files.push({ path: relativePath, content });
   }
 }
 
