@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aolingge/aolingge/main/assets/developer-cover.png" alt="Original decorative artwork for this project" width="100%" />
+</p>
+
 # agent-secret-guard
 
 Read this in your language: English | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Español](README.es.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Português](README.pt.md) | [Русский](README.ru.md) | [العربية](README.ar.md) | [हिन्दी](README.hi.md) | [Bahasa Indonesia](README.id.md)
@@ -24,6 +28,15 @@ Good first checks:
 - Before commit or PR: `npx agent-secret-guard scan . --fail-on high`
 - In GitHub Actions: add the [Marketplace Action](https://github.com/marketplace/actions/agent-secret-guard)
 - For agent-generated changes: scan after the agent edits files and before you copy logs or release notes into public channels
+
+## Project guide
+
+| Area | Details |
+| --- | --- |
+| **For** | Maintainers preparing AI-agent, MCP or local automation repositories for review or sharing. |
+| **Coverage** | Secret-like values, MCP arguments, broad access, browser/credential references and GitHub Actions permissions. |
+| **Workflow** | Run a local scan, inspect each finding and apply a targeted fix; use a severity threshold in CI. |
+| **Start** | [Quick start](#quick-start) · [Fix guide](docs/remediation.md) · [Action wrapper](https://github.com/aolingge/agent-secret-guard-action) |
 
 ## Why This Exists
 
