@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aolingge/aolingge/main/assets/developer-cover.png" alt="语言学习主题装饰插画" width="100%" />
+</p>
+
 # agent-secret-guard
 
 阅读语言：[English](README.md) | 简体中文 | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Español](README.es.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Português](README.pt.md) | [Русский](README.ru.md) | [العربية](README.ar.md) | [हिन्दी](README.hi.md) | [Bahasa Indonesia](README.id.md)
@@ -7,6 +11,15 @@
 `agent-secret-guard` 是一个 5 分钟安全检查工具，用来扫描普通 secret scanner 容易漏掉的位置：MCP 命令参数、AI coding 规则、本地自动化说明、浏览器 profile 路径、credential store 引用，以及权限过宽的 GitHub Actions workflow。
 
 需要人工发布前检查？我提供面向 AI Agent / MCP / GitHub Actions / 本地自动化仓库的 [AI Agent Repo Safety Audit](docs/ai-agent-repo-safety-audit.md)，并提供 [样例报告](docs/sample-audit-report.md) 和 [外联文案包](docs/outreach-kit.md)。
+
+## 项目速览
+
+| 项目 | 说明 |
+| --- | --- |
+| **适合谁** | 准备审查或分享 AI Agent、MCP、本地自动化仓库的维护者。 |
+| **检查范围** | 疑似凭据、MCP 参数、宽泛访问、浏览器或凭据存储引用，以及 GitHub Actions 权限。 |
+| **使用路径** | 本地扫描、确认每条发现、针对性修复；CI 可设置失败的最低风险等级。 |
+| **入口** | [快速开始](#快速开始) · [修复指南](docs/remediation.md) · [Action 封装](https://github.com/aolingge/agent-secret-guard-action) |
 
 ## 为什么需要它
 
