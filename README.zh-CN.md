@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/aolingge/aolingge/main/assets/developer-cover.png" alt="语言学习主题装饰插画" width="100%" />
+  <img src="https://raw.githubusercontent.com/aolingge/aolingge/main/assets/developer-cover.png" alt="AI Agent 与开发工具主题装饰插画" width="100%" />
 </p>
 
 # agent-secret-guard
