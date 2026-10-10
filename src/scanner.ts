@@ -84,16 +84,34 @@ async function walk(root: string, current: string, files: ScanFile[], excludePat
       continue;
     }
 
-    const file = await open(absolutePath, "r");
-    try {
-      const fileStat = await file.stat();
-      if (fileStat.size <= MAX_FILE_BYTES) {
-        const content = await file.readFile("utf8");
-        files.push({ path: relativePath, content });
-      }
-    } finally {
-      await file.close();
+    const content = await readBoundedFile(absolutePath);
+    if (content !== null) files.push({ path: relativePath, content });
+  }
+}
+
+async function readBoundedFile(path: string): Promise<string | null> {
+  let file: Awaited<ReturnType<typeof open>> | undefined;
+  try {
+    file = await open(path, "r");
+    const fileStat = await file.stat();
+    if (!fileStat.isFile() || fileStat.size > MAX_FILE_BYTES) return null;
+
+    // Read one extra byte to detect growth after stat without scanning a
+    // truncated prefix or allocating an unbounded file-sized buffer.
+    const buffer = Buffer.alloc(MAX_FILE_BYTES + 1);
+    let total = 0;
+    while (total < buffer.length) {
+      const { bytesRead } = await file.read(buffer, total, buffer.length - total, total);
+      if (bytesRead === 0) break;
+      total += bytesRead;
     }
+    return total > MAX_FILE_BYTES ? null : buffer.subarray(0, total).toString("utf8");
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "code" in error &&
+        (error.code === "ENOENT" || error.code === "ENOTDIR")) return null;
+    throw error;
+  } finally {
+    await file?.close();
   }
 }
 
