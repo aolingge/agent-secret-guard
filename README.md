@@ -242,6 +242,8 @@ By default, the CLI scans:
 
 It skips common generated folders such as `.git`, `node_modules`, `dist`, `coverage`, `.next`, `.turbo`, and `.cache`.
 
+Collection reads regular files through one open handle and enforces a 1 MiB byte limit, including growth after the initial size check. Oversized files and files removed during collection are skipped; permission and unexpected I/O errors fail the scan. Collection is best effort on a changing filesystem, not an atomic snapshot or a symlink sandbox.
+
 ## Configuration
 
 Create `.agent-secret-guard.json` to exclude known fixtures or generated examples:
